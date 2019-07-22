@@ -1,0 +1,26 @@
+XID timing and decoding of time
+
+Micropy - necesary for reaction time and python is doable
+
+Several things opensource on github: pyxid
+
+3D Printing - Laser cutting
+
+24 bits of milliseconds
+
+Cedrus support xid support commands
+
+Implement XID in Adruino straight forward
+	constantly pull io
+	math at beginning 
+	command to start test and everything be relative to that time
+
+Verying:??
+	Check system clock
+	pulse a pin in sync with clock (nonstandard tweaking)
+	looking at what it is think is a milli
+	configure to 
+	use oscilloscope measure 
+	32u4s Sanbee21 (Nick preferred)
+
+

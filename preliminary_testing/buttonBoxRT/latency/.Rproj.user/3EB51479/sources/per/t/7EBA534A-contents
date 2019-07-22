@@ -1,0 +1,119 @@
+---
+title: "buttonRT"
+author: "Drake Asberry"
+date: "4/12/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r}
+summary(allLatencyMS$latencyMillisec)
+sd(allLatencyMS$latencyMillisec)
+```
+
+
+
+R version 3.5.1 (2018-07-02) -- "Feather Spray"
+Copyright (C) 2018 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin15.6.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+[Workspace loaded from ~/Desktop/buttonBoxRT/latency/.RData]
+
+> library(readxl)
+> all_runs <- read_excel("/Volumes/UNTITLED/Testing_Delay/all_runs.xlsx", 
++     col_types = c("numeric", "numeric", "numeric", 
++         "numeric", "text", "text"))
+readxl works best with a newer version of the tibble package.
+You currently have tibble v1.4.2.
+Falling back to column name repair from tibble <= v1.4.2.
+Message displays once per session.
+> View(all_runs)                                                                                              
+> summary(all_runs)
+ latency_micro    delayTime_micro  latency_msec     delayTime_msec     color              cDelay         
+ Min.   :     2   Min.   : 100    Min.   :  0.002   Min.   :0.100   Length:10000       Length:10000      
+ 1st Qu.:     7   1st Qu.:2348    1st Qu.:  0.007   1st Qu.:2.348   Class :character   Class :character  
+ Median : 70461   Median :4596    Median : 70.461   Median :4.596   Mode  :character   Mode  :character  
+ Mean   : 72396   Mean   :4596    Mean   : 72.396   Mean   :4.596                                        
+ 3rd Qu.:144724   3rd Qu.:6843    3rd Qu.:144.725   3rd Qu.:6.843                                        
+ Max.   :150454   Max.   :9091    Max.   :150.454   Max.   :9.091                                        
+> tapply(all_runs$latency_msec,all_runs$cDelay,mean)
+      000ms       150ms 
+  0.0206412 144.7711330 
+> delay_000 -> all_runs[which(all_runs$cDelay=='000ms'),]
+Error: object 'delay_000' not found
+> delay_000 <- all_runs[which(all_runs$cDelay=='000ms'),]
+> delay_150 <- all_runs[which(all_runs$cDelay=='150ms'),]
+> View(delay_150)
+> tapply(delay_000$latency_msec,delay_000$color,mean)
+    Blue    Green      Red    White   Yellow 
+0.022984 0.018621 0.017852 0.022393 0.021356 
+> tapply(delay_000$latency_msec,delay_000$color,sd)
+      Blue      Green        Red      White     Yellow 
+0.12171985 0.10412783 0.09487139 0.10259369 0.10273316 
+> tapply(delay_150$latency_msec,delay_150$color,mean)
+    Blue    Green      Red    White   Yellow 
+144.7725 144.7656 144.7810 144.7606 144.7759 
+> tapply(delay_150$latency_msec,delay_150$color,sd)
+    Blue    Green      Red    White   Yellow 
+2.647507 2.629456 2.627136 2.635780 2.634431 
+> grRd_150 <- delay_150[which(delay_150$color=='Green' & delay_150$color=='Red'),]
+> grRd_150 <- delay_150[which(delay_150$color=='Green' | delay_150$color=='Red'),]
+> View(grRd_150)
+> t.test(grRd_150$latency_msec~grRd_150$color)
+
+	Welch Two Sample t-test
+
+data:  grRd_150$latency_msec by grRd_150$color
+t = -0.13038, df = 1998, p-value = 0.8963
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -0.2458408  0.2151908
+sample estimates:
+mean in group Green   mean in group Red 
+           144.7656            144.7810 
+
+> grRd_000 <- delay_000[which(delay_000$color=='Green' | delay_000$color=='Red'),]
+> t.test(grRd_000$latency_msec~grRd_000$color)
+
+	Welch Two Sample t-test
+
+data:  grRd_000$latency_msec by grRd_000$color
+t = 0.17263, df = 1980.9, p-value = 0.863
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -0.007967133  0.009505133
+sample estimates:
+mean in group Green   mean in group Red 
+           0.018621            0.017852
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r}
+boxplot(allLatencyMS$latencyMillisec)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

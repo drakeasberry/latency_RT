@@ -1,0 +1,29 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1555055508824.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "9CFB091C",
+    "lastKnownWriteTime" : 6,
+    "last_content_update" : 1555055508824,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "5C4FE50A",
+        "caption" : "allLatencyMS",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=allLatencyMS&cache_key=5C4FE50A",
+        "displayedObservations" : 10000,
+        "environment" : "",
+        "object" : "allLatencyMS",
+        "preview" : 0,
+        "totalObservations" : 10000,
+        "variables" : 5
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_dataframe"
+}
